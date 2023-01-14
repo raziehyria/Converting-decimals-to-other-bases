@@ -4,7 +4,7 @@
 int ConvDecimal(int num)
 {
     // creating an array to store the numbers (max 7 characters)
-    int binNum[7];
+    int binNum[32];
     // used to keep track of the position we are inserting into
     int index=7; 
     
@@ -25,9 +25,3 @@ int ConvDecimal(int num)
         }
     
 }
-
-// hex converter header function
-
-
-// octol converter header function
-    
