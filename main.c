@@ -25,42 +25,51 @@
 *H*/
 
 #include <stdio.h> 
-#include <ctype.h>// header file for checking character types for user input
+#include <ctype.h> // header file for checking character types for user input
+#include <stdbool.h>
 
 // defining the min and max input values for cleaner code
-#define min 0
+#define min -2
 #define max 2000000
+int userInput;
 
- 
+// put conv function here
+
+
 int main()
 {
-    //store user input in int var and char var
-    int userInput;
-    char str = userInput;
+    bool isRunning = true;
+    char str = userInput; //store user input in int var and char var
 
     // welcome message
     printf("Welcome to the Decimal converter! \n");
     printf("Your number will be converted into Binary, Hex, and Octal! \n"); 
+    printf("Input an integer from 0 -> 2,000,000 to convert: \n"); //ask user input
     
-    do // 'do' feature used to ask for the integer until a proper one is inserted
+    while(isRunning)
+    {
         
+        scanf("%d", &userInput);  //take user input () and store in variable
+        
+        while(userInput <= min || userInput > max)
+            {
+                printf("%d Invalid input! Try Again! ", userInput);
+                scanf("%d", &userInput);  
+                //take user input () and store in variable
+
+            }
+        
+        if (userInput == -1)
         {
-            printf("Input an integer from 0 -> 2,000,000 to convert: \n"); //ask user input
-            scanf("%d", &userInput);  //take user input () and store in variable
-
-        } while(userInput < min || userInput > max || isdigit(str) == 0); /* validate the user input */
-            // prompts them to try again
-            // while its not less than 0, greater than max, or a letter
-    
-    printf("your digit was: %d \n", userInput);
-    
-    
-    
-    // call converter function
-
-    
-    //printf("Invalid integer! Try Again! ");
+            printf("Thanks!");
+            isRunning = false;
+        }
+        printf("valid!");
+        
                 
+        // with user input call converter function
+        
+    }            
      
     /* q = 200
     while (quotient > 0)
