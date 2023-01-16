@@ -24,66 +24,124 @@
 *
 *H*/
 
-#include <stdio.h> 
+#include <stdio.h>
 #include <ctype.h> // header file for checking character types for user input
 #include <stdbool.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
 
 // defining the min and max input values for cleaner code
 #define min -2
 #define max 2000000
+#define exit -1
+
 int userInput;
+bool isRunning = true;
 
-// put conv function here
 
+void flush_stream();
+void ConvDecimal(int decimal, int base);
 
-int main()
-{
-    bool isRunning = true;
-    char str = userInput; //store user input in int var and char var
-
-    // welcome message
-    printf("Welcome to the Decimal converter! \n");
-    printf("Your number will be converted into Binary, Hex, and Octal! \n"); 
-    printf("Input an integer from 0 -> 2,000,000 to convert: \n"); //ask user input
-    
-    while(isRunning)
-    {
-        
-        scanf("%d", &userInput);  //take user input () and store in variable
-        
-        while(userInput <= min || userInput > max)
-            {
-                printf("%d Invalid input! Try Again! ", userInput);
-                scanf("%d", &userInput);  
-                //take user input () and store in variable
-
-            }
-        
-        if (userInput == -1)
-        {
-            printf("Thanks!");
-            isRunning = false;
-        }
-        printf("valid!");
-        
-                
-        // with user input call converter function
-        
-    }            
-     
-    /* q = 200
+//  conv function 
+/* q = 200
     while (quotient > 0)
     r = q%2
     q = q/2
-    store remainder somethere
-    int arr[32]
-    use one singular function w the same division method logic
-    call funcion 3 times  and insert base to divide it by 
     convDec(int x, int divbase);
-    */
 
+	Using formula from in class discussion, and classmate Anthonys suggestion/solution 
+	using format identifires for printf
     
+    */
+void ConvDecimal(int decimal, int base)
+{	
+	// storing the remainder
+	int remainder = decimal%base;
+
+	if(decimal == 0) // exist clause for the while loop
+	{
+		printf("0"); //printing the value
+		return; // exiting the function
+	}
+	
+	// recursively calls itself until the value is 0, and then prints the solution backwards (due to princ. of recurrsion)
+	ConvDecimal(decimal/base,base);	
+	
+	if(remainder < 10) // for octol and binary bases
+	{
+		printf("%d", remainder);
+	}
+	else // hexadecimal bases check using the format identifiers mentioned above
+	{
+		printf("%c", remainder-10+'A');
+	}			
+}
+/*
+ The scanf buffer is used with the %d integer format specfifier so that the program or scanner knows to accept 
+an integer. When this doesnt occur, the program gets caught in an infinite loop, since the scanner doesnt know what to do with that 
+unexpected value. The function below "flushes" the stdin input stream so that the user can enter another value
+
+Borrowed from StackOverflow:
+https://stackoverflow.com/a/26081123/17628672
+
+*/
+void flush_stream(void)// clearing the scanf buffer
+{
+	int c;
+    while ( (c = getchar()) != '\n' && c != EOF ) { }
+}
+
+int main()
+{
+	
+    // welcome message
+    printf("\nWelcome to the Decimal converter! Type in -1 to exit. \n");
+    printf("Your number will be converted into Binary, Hex, and Octal! \n"); 
+	
+	// will loop until isRunning = false
+    while(isRunning)
+    {
+		printf("Input an integer from 0 -> 2,000,000 to convert: \n"); //ask user input
+		
+		bool isValidating = true;
+		while(isValidating)
+		{
+			
+			if(scanf("%d", &userInput) != 1) // checks to see if the character is not an int
+				{
+					fputs("\nInvalid entry! Try Again! \n", stderr);
+					flush_stream();
+				}	
+			else if(userInput <= min) // validation process to check if its less than 0
+				{
+					printf("%d Too Small! Try Again! \n", userInput);
+				}
+			else if (userInput > max) // checks if greater than max
+				{
+					printf("%d Too big! Try Again!\n", userInput);  
+				}
+			else if (userInput == exit) // exit condition
+				{
+					printf("Thank you! Come again.");
+					isValidating = false;  // exits current program
+				}
+			else // otherwise call on the ConvDec function and return output to user
+				{ 
+					printf("\nConverting %d..\n", userInput);
+					printf("\nBinary: ");
+					ConvDecimal(userInput,2);	
+					printf("\nHexadecimal: ");
+					ConvDecimal(userInput,16);
+					printf("\nOctal: ");
+					ConvDecimal(userInput,8);
+					printf("\nInsert another number to try again or -1 to exit: ");
+				}
+
+		} // is validating
+		
+	isRunning = false; // used to exit function
+
+	} // is running            
 }
 // end of main function
-
-
