@@ -1,9 +1,9 @@
 
-#C Programming Lab
+# C Programming Lab
 Convert Decimal to Hex, Binary, and Octal
 
 
-##Programming guidelines
+## Programming guidelines
 1. Create a comment header, at the top of the document.
 2. It must contain your name, the course (and semester)
 3. brief description of what the program does.
@@ -12,13 +12,15 @@ Convert Decimal to Hex, Binary, and Octal
 6. Use meaningful variable names.
 7. Make the code readable.
 
-##Program Requirements
-##1. The project shall be called: “ConvDecimal_to_OtherBases”.
-##2. Input
+## Program Requirements
+## 1. The project shall be called: “ConvDecimal_to_OtherBases”.
+
+## 2. Input
 a. Allow user to input an integer from 0 -> 2,000,000.
 b. Validate the input.  If input is invalid, make them enter a value again 
 (while), until they enter a valid value.
-###3. Processing
+
+### 3. Processing
 a. Use the Division method for converting Decimal to Binary, and Hexadecimal, and Octal.
 i. Divide the quotient by 2 or 16 or 8, respectively.
 ii. Get the remainder after dividing. Save the remainders.  They are 
@@ -29,9 +31,7 @@ d. Stop looping and exit when the user enters “-1”.
 e. Create a function (and a corresponding .h file) named ConvDecimal().
 i. Make sure you store (and Add) this separate .cpp and .h file to your 
 project.
-f. You will create 1 function that will convert Decimal to all 3 other bases (2, 
-16, and 8). You (the programmer) need to determine what the parameters 
-should be for this function.
+f. You will create 1 function that will convert Decimal to all 3 other bases (2, 16, and 8). You (the programmer) need to determine what the parameters should be for this function.
 g. This function will return nothing.
 
 ###4. Output
